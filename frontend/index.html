@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fetch</title>
+</head>
+<body>
+<h1 id="title"></h1>
+
+<div>
+    <label for="name">What's your name ?</label>
+    <input  id="name" type="text" />
+    <button id="send">Say hi!</button>
+</div>
+
+<script type="application/javascript">
+    const title = document.getElementById("title")
+    const nameInput = document.getElementById("name")
+    const sender = document.getElementById("send")
+
+    sender.addEventListener("click", () => {
+        let query = "";
+        if (nameInput.value !== "") {
+            query = "?name=" + nameInput.value
+        }
+
+        fetch("/backend"+query)
+            .then((response) => response.json())
+            .then((data) => {
+                title.innerText = data.greetings;
+            });
+    })
+</script>
+</body>
+</html>
